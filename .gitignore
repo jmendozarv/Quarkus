@@ -1,0 +1,23 @@
+# Ignorar los directorios target en todos los subproyectos
+**/target/
+
+# Ignorar archivos de compilación comunes de Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Ignorar archivos generados por IDEs comunes
+*.log
+*.iml
+*.ipr
+*.iws
+.idea/
+.project
+.classpath
+.settings/
+
+# Ignorar binarios y temporales
+bin/
+tmp/
+*.swp
