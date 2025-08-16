@@ -1,59 +1,31 @@
 # reservation-service
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+1. Para las fechas de inicio y fin proporcionadas por el usuario, se devuelve una lista de coches disponibles para alquilar. 
+2. Reserva un coche específico para un conjunto de fechas.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+### quarkus-rest-jackson
+* Elegimos la extensión quarkus-rest-jackson porque queremos usar la biblioteca Jackson para manejar la serialización y deserialización JSON de solicitudes y respuestas de los servicios REST que expone el servicio de reserva.
 
-## Running the application in dev mode
+### quarkus-rest
+*  proporciona la funcionalidad principal de REST, es una dependencia de quarkus-rest-jackson (que solo le agrega el soporte de Jackson), por lo que no tenemos que agregar quarkus-rest explícitamente.
 
-You can run your application in dev mode that enables live coding using:
 
-```shell script
-./mvnw compile quarkus:dev
+### quarkus-rest-client-jackson
+* _Usamos la extensión quarkus-rest-client-jackson porque queremos que Jackson gestione la serialización y deserialización de JSON de las solicitudes REST posteriores que crea el servicio de reservas. Nuevamente, la funcionalidad principal del cliente REST se incorpora transitivamente como la extensión quarkus-rest-client._
+
+### quarkus-smallrye-openapi
+* _La extensión quarkus-smallrye-openapi permite generar un documento OpenAPI que documenta nuestra API REST expuesta. También crea una interfaz de usuario sencilla que podemos usar para probar los endpoints REST que desarrollamos._
+
+Antes de crear cualquier código, asegúrese de iniciar el modo Dev de Quarkus, lo que puede hacerse, como recordará, ejecutando la CLI de Quarkus:
+
+```bash
+mvn quarkus:dev
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
 
-## Packaging and running the application
+### @Singleton
+* _La anotación @Singleton se usa para indicar que la clase es un singleton, lo que significa que solo habrá una instancia de esta clase en toda la aplicación. Esto es útil para servicios que no necesitan ser instanciados varias veces y pueden compartir el mismo estado._
+* _Esta anotación forma parte de la especificación de Inyección de Contexto y Dependencia (CDI). Nos permite usar esta clase como implementación de InventoryClient donde la aplicación la requiera._
 
-The application can be packaged using:
-
-```shell script
-./mvnw package
-```
-
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
-```
-
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using:
-
-```shell script
-./mvnw package -Dnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/reservation-service-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Related Guides
-
-- SmallRye OpenAPI ([guide](https://quarkus.io/guides/openapi-swaggerui)): Document your REST APIs with OpenAPI - comes with Swagger UI
-- REST Jackson ([guide](https://quarkus.io/guides/rest#json-serialisation)): Jackson serialization support for Quarkus REST. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it
+## OPEN API
+- You can check the response from http://localhost :8081/q/openapi if you want to see the whole document.
