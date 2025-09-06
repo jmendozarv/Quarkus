@@ -11,7 +11,8 @@
 # Then, build the image with:
 #
 # docker build -f src/main/docker/Dockerfile.native-micro -t quarkus/code-with-quarkus .
-#
+# Esto me funciono
+# .\mvnw.cmd --% package -DskipTests -Pnative -Dquarkus.native.container-build=true
 # Then run the container using:
 #
 # docker run -i --rm -p 8080:8080 quarkus/code-with-quarkus

@@ -3,3 +3,13 @@
 !target/*-runner.jar
 !target/lib/*
 !target/quarkus-app/*
+
+# ignore everything by default
+**
+
+# but keep these for image builds
+!target/*-runner
+!target/*-runner.jar
+!target/quarkus-app/**
+!src/main/docker/**
+!pom.xml
