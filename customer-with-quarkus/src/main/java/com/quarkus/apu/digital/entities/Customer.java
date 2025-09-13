@@ -1,9 +1,13 @@
 package com.quarkus.apu.digital.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +25,8 @@ public class Customer {
   private String surnames;
   private String phone;
   private String address;
-  //un cliente puede tener varios productos
+  @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+  @JsonManagedReference
   private List<Product> products;
 
 }
